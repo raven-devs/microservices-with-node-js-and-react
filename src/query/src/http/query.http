@@ -1,0 +1,8 @@
+@host = http://localhost
+@port = 4003
+@url = {{host}}:{{port}}
+@contentTypeJson = application/json
+
+### find all posts
+GET {{url}}/posts
+Content-Type: {{contentTypeJson}}

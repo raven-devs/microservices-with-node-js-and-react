@@ -1,0 +1,21 @@
+@host = http://localhost
+@port = 4002
+@url = {{host}}:{{port}}
+@contentTypeJson = application/json
+@postId = f43f9959-019e-4e3d-8c29-12e8b5bfc824
+
+### find all
+GET {{url}}/comments
+Content-Type: {{contentTypeJson}}
+
+### find all by post id
+GET {{url}}/posts/{{postId}}/comments
+Content-Type: {{contentTypeJson}}
+
+### create by post id
+POST {{url}}/posts/{{postId}}/comments
+Content-Type: {{contentTypeJson}}
+
+{
+  "content": "comment2"
+}

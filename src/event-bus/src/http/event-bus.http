@@ -1,0 +1,21 @@
+@host = http://localhost
+@port = 4000
+@baseUrl = /events
+@url = {{host}}:{{port}}{{baseUrl}}
+@contentTypeJson = application/json
+
+### findAll
+GET {{url}}
+Content-Type: {{contentTypeJson}}
+
+### create
+POST {{url}}
+Content-Type: {{contentTypeJson}}
+
+{
+  "type": "PostCreate",
+  "payload": {
+    "id": "5c0bc6ca-290a-4090-9c65-bbfb6ee71abb",
+    "title": "Post1"
+  }
+}

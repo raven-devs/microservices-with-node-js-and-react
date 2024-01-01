@@ -1,0 +1,17 @@
+@host = http://localhost
+@port = 4001
+@baseUrl = /posts
+@url = {{host}}:{{port}}{{baseUrl}}
+@contentTypeJson = application/json
+
+### find all
+GET {{url}}
+Content-Type: {{contentTypeJson}}
+
+### create
+POST {{url}}
+Content-Type: {{contentTypeJson}}
+
+{
+  "title": "posts2"
+}
