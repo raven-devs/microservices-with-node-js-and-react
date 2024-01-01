@@ -1,25 +1,26 @@
-const { HttpStatusCode } = require('axios');
-const { v4: uuid } = require('uuid');
-const { EventType } = require('../event/event-type');
-const { Event } = require('../event/event');
-const { EventEmitter } = require('../event/event-emitter');
-const { Comment } = require('./comment');
-const { CommentStatus } = require('./comment-status');
-const { CommentDao } = require('../comment/comment-dao');
+import { HttpStatusCode } from 'axios';
+import { Request, Response } from 'express';
+import { v4 as uuid } from 'uuid';
+import { Event } from '../event/event';
+import { EventEmitter } from '../event/event-emitter';
+import { EventType } from '../event/event-type';
+import { Comment } from './comment';
+import { CommentDao } from './comment-dao';
+import { CommentStatus } from './comment-status';
 
-const CommentController = {
-  findAll: (req, res) => {
+export const CommentController = {
+  findAll: (req: Request, res: Response) => {
     res.status(HttpStatusCode.Ok).send(CommentDao.commentsByPostId);
   },
 
-  findAllByPostId: (req, res) => {
+  findAllByPostId: (req: Request, res: Response) => {
     const postId = req.params.id;
     const comments = CommentDao.commentsByPostId[postId] || [];
 
     res.status(HttpStatusCode.Ok).send(comments);
   },
 
-  createByPostId: async (req, res) => {
+  createByPostId: async (req: Request, res: Response) => {
     try {
       const id = uuid();
       const postId = req.params.id;
@@ -32,7 +33,7 @@ const CommentController = {
         status: CommentStatus.Pending,
       });
 
-      const comments = CommentDao.commentsByPostId[postId] || [];
+      const comments: Comment[] = CommentDao.commentsByPostId[postId] || [];
       comments.push(comment);
       CommentDao.commentsByPostId[postId] = comments;
 
@@ -48,8 +49,4 @@ const CommentController = {
       res.status(HttpStatusCode.InternalServerError).send({ error });
     }
   },
-};
-
-module.exports = {
-  CommentController,
 };

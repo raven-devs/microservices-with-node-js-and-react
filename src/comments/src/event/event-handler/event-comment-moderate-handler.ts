@@ -1,13 +1,14 @@
-const { EventHandler } = require('./event-handler');
-const { Comment } = require('../../comment/comment');
-const { CommentDao } = require('../../comment/comment-dao');
-const { Event } = require('../event');
-const { EventEmitter } = require('../event-emitter');
-const { EventType } = require('../event-type');
+import { Comment } from '../../comment/comment';
+import { CommentCreateDto } from '../../comment/comment-create-dto';
+import { CommentDao } from '../../comment/comment-dao';
+import { Event } from '../event';
+import { EventEmitter } from '../event-emitter';
+import { EventType } from '../event-type';
+import { EventHandler } from './event-handler';
 
 // replace a comment entity in dao with an updated comment entity from the Moderation Service
-class EventCommentModerateHandler extends EventHandler {
-  static async handle(payload) {
+export class EventCommentModerateHandler implements EventHandler {
+  async handle(payload: CommentCreateDto): Promise<void> {
     const comment = new Comment({ ...payload });
     const { id, postId } = comment;
 
@@ -28,7 +29,3 @@ class EventCommentModerateHandler extends EventHandler {
     await EventEmitter.emit(event);
   }
 }
-
-module.exports = {
-  EventCommentModerateHandler,
-};

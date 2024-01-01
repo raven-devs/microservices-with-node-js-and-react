@@ -1,8 +1,8 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const { EventController } = require('../event/event-controller');
-const { CommentController } = require('../comment/comment-controller');
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import express from 'express';
+import { CommentController } from '../comment/comment-controller';
+import { EventController } from '../event/event-controller';
 
 const PORT = 4002;
 const SERVICE_NAME = '[Comments Service]';

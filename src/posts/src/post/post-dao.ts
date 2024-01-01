@@ -1,5 +1,7 @@
+import { Post } from './post';
+
 interface PostDao {
-  postsById: Record<string, unknown>;
+  postsById: Record<string, Post>;
 }
 
 export const PostDao: PostDao = {

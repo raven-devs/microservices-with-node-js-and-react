@@ -1,8 +1,9 @@
-const { HttpStatusCode } = require('axios');
-const { EventHandlerFactory } = require('../event/event-handler/event-handler-factory');
+import { HttpStatusCode } from 'axios';
+import { Request, Response } from 'express';
+import { EventHandlerFactory } from './event-handler/event-handler-factory';
 
-const EventController = {
-  create: async (req, res) => {
+export const EventController = {
+  create: async (req: Request, res: Response) => {
     try {
       const event = req.body;
       const { type, payload } = event;
@@ -18,8 +19,4 @@ const EventController = {
       res.status(HttpStatusCode.InternalServerError).send({ error });
     }
   },
-};
-
-module.exports = {
-  EventController,
 };
