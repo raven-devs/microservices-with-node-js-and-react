@@ -1,17 +1,18 @@
-const { v4: uuid } = require('uuid');
-const { EventType } = require('../event/event-type');
-const { HttpStatusCode } = require('axios');
-const { Event } = require('../event/event');
-const { EventEmitter } = require('../event/event-emitter');
-const { Post } = require('./post');
-const { PostDao } = require('../post/post-dao');
+import { HttpStatusCode } from 'axios';
+import { Request, Response } from 'express';
+import { v4 as uuid } from 'uuid';
+import { Event } from '../event/event';
+import { EventEmitter } from '../event/event-emitter';
+import { EventType } from '../event/event-type';
+import { Post } from './post';
+import { PostDao } from './post-dao';
 
-const PostController = {
-  findAll: (req, res) => {
+export const PostController = {
+  findAll: (req: Request, res: Response) => {
     res.status(HttpStatusCode.Ok).send(PostDao.postsById);
   },
 
-  create: async (req, res) => {
+  create: async (req: Request, res: Response) => {
     try {
       const id = uuid();
       const { title } = req.body;
@@ -32,8 +33,4 @@ const PostController = {
       res.status(HttpStatusCode.InternalServerError).send({ error });
     }
   },
-};
-
-module.exports = {
-  PostController,
 };

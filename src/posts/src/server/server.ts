@@ -1,8 +1,8 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const { PostController } = require('../post/post-controller');
-const { EventController } = require('../event/event-controller');
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import express from 'express';
+import { EventController } from '../event/event-controller';
+import { PostController } from '../post/post-controller';
 
 const PORT = 4001;
 const SERVICE_NAME = '[Posts Service]';
